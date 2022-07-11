@@ -61,6 +61,23 @@ getGPPInfo(){
 
 }
 
+getGDBInfo(){
+    test -f /usr/bin/gdb && gdb_found="Found GDB"
+
+    if [ -z "$gdb_found" ]
+    then
+        gdb_found="GDB not installed/found"
+        echo "GDB not found"
+        echo $gdb_found >> log.txt
+    else
+        gdb --version >> gdb.log
+        gdb_version=$(grep "(GDB)" gdb.log)
+        echo $gdb_version >> log.txt
+        rm gdb.log
+    fi
+
+}
+
 getJDKInfo(){
     test -f /usr/bin/java && openjdk_found="Found openJDK"
 
@@ -107,5 +124,7 @@ rm log.txt
 getOSDetails
 getGCCInfo
 getGPPInfo
+getGDBInfo
 getJDKInfo
 getBrowserInfo
+cat log.txt
