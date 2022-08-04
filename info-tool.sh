@@ -3,6 +3,7 @@
 temp=""
 os_id=""
 os_version=""
+kernel=""
 
 gcc_found=""
 gcc_version=""
@@ -10,11 +11,13 @@ gcc_version=""
 
 getOSDetails(){
     source /etc/os-release
+    kernel=$(uname -r)
     echo "-----OS INFO-----" >> log.txt
     echo "====================" >> log.txt
     echo "|OS NAME: " $ID >> log.txt
     echo "|VERSION: " $VERSION  >> log.txt
     echo "|Pretty Name: " $PRETTY_NAME >> log.txt
+    echo "|Kernel Version: " $kernel >> log.txt
     echo "====================" >> log.txt
     
 
